@@ -16,8 +16,8 @@ namespace CamelRegistry.Repository
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Name).IsRequired().HasMaxLength(50);
-                entity.Property(e => e.Color).IsRequired().HasMaxLength(50);
-                entity.Property(e => e.HumbCount).IsRequired();
+                entity.Property(e => e.Color).HasMaxLength(50);
+                entity.Property(e => e.HumbCount).IsRequired().HasMaxLength(1);
             });
         }
     }
