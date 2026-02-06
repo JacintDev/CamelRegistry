@@ -13,7 +13,7 @@ namespace CamelRegistry.Repository
         Task<List<Camel>> GetAllAsync(params Expression<Func<Camel, object>>[] includes);
         Task<Camel?> GetByIdAsync(Guid id);
         Task<Camel> AddAsync(Camel entity);
-        Task DeleteAsync(Guid id);
+        Task DeleteAsync(Camel entity);
         Task<Camel> UpdateAsync(Camel entity);
     }
 }

@@ -25,12 +25,10 @@ namespace CamelRegistry.Repository
             return entity;
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Camel entity)
         {
-            var entity = await GetByIdAsync(id);
-            if (entity != null) {
-            _context.Remove(entity);
-            }
+
+            _context.Camels.Remove(entity);
             await _context.SaveChangesAsync();
         }
 
