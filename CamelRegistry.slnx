@@ -1,3 +1,5 @@
 <Solution>
   <Project Path="CamelRegistry.Entities/CamelRegistry.Entities.csproj" />
+  <Project Path="CamelRegistry.Logic/CamelRegistry.Logic.csproj" />
+  <Project Path="CamelRegistry.Repository/CamelRegistry.Repository.csproj" />
 </Solution>
