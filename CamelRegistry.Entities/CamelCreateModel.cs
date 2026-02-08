@@ -10,7 +10,7 @@ namespace CamelRegistry.Entities
     {
         public string Name { get; set; } = string.Empty;
         public string? Color { get; set; } 
-        public int HumbCount { get; set; }
+        public int HumpCount { get; set; }
         public DateTime? LastFed { get; set; }
     }
 }

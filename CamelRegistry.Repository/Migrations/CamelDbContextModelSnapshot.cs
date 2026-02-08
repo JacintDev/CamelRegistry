@@ -27,7 +27,7 @@ namespace CamelRegistry.Repository.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("HumbCount")
+                    b.Property<int>("HumpCount")
                         .HasMaxLength(1)
                         .HasColumnType("INTEGER");
 

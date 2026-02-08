@@ -3,4 +3,5 @@
   <Project Path="CamelRegistry.Entities/CamelRegistry.Entities.csproj" />
   <Project Path="CamelRegistry.Logic/CamelRegistry.Logic.csproj" />
   <Project Path="CamelRegistry.Repository/CamelRegistry.Repository.csproj" />
+  <Project Path="CamelRegistry.Tests/CamelRegistry.Tests.csproj" Id="e2526fb2-eb59-4a9f-ad87-3461fd59ad12" />
 </Solution>

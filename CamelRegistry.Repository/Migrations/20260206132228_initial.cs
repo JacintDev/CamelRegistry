@@ -18,7 +18,7 @@ namespace CamelRegistry.Repository.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
                     Color = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
-                    HumbCount = table.Column<int>(type: "INTEGER", maxLength: 1, nullable: false),
+                    HumpCount = table.Column<int>(type: "INTEGER", maxLength: 1, nullable: false),
                     LastFed = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
