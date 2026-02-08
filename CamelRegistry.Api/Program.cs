@@ -82,33 +82,43 @@ namespace CamelRegistry.Api
             {
                 var allCamels = await logic.GetAllAsync();
                 return Results.Ok(allCamels);
-            });
+            })
+                .WithName("GetAllCamels")
+                .WithSummary("Retrieves all camels");
 
             camels.MapGet("/{id:guid}", async (Guid id, ICamelLogic logic) =>
             {
                 var eliteCamel= await logic.GetByIdAsync(id);
                 return Results.Ok(eliteCamel);
-            });
+            })
+                .WithName("GetCamelById")
+                .WithSummary("Retrieves a camel by its unique identifier");
 
             camels.MapPost("/", async (CamelCreateModel createModel, ICamelLogic logic) =>
             {
                 var result = await logic.AddAsync(createModel);
                 return Results.Created($"/camels/{result.Id}", result);  
-            });
+            })
+                .WithName("CreateCamel")
+                .WithSummary("Creates a new camel with the provided details");
 
             camels.MapPut("/{id:guid}", async (Guid id, CamelUpdateModel updateModel, ICamelLogic logic) =>
             {
                 var updatedModel= await logic.UpdateAsync(id, updateModel);
                 return Results.Ok(updatedModel);
-            });
+            })
+                .WithName("UpdateCamel")
+                .WithSummary("Updates an existing camel's details by its unique identifier");
             camels.MapDelete("/{id:guid}", async (Guid id, ICamelLogic logic) =>
             {
                 await logic.DeleteAsync(id);
                 return Results.NoContent();
-            });
+            })
+                .WithName("DeleteCamel")
+                .WithSummary("Deletes a camel by its unique identifier");
 
 
-            using(var scope= app.Services.CreateScope())
+            using (var scope= app.Services.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<CamelDbContext>();
                 db.Database.Migrate();
