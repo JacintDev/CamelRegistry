@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace CamelRegistry.Logic
 {
-    public class CamelLogic
+    public class CamelLogic : ICamelLogic
     {
         private readonly ICamelRepository _repo;
         private readonly IMapper _mapper;
@@ -36,7 +36,7 @@ namespace CamelRegistry.Logic
 
         public async Task DeleteAsync(Guid id)
         {
-            var entity= await _repo.GetByIdAsync(id);
+            var entity = await _repo.GetByIdAsync(id);
             if (entity == null)
             {
                 throw new KeyNotFoundException($"Camel with id {id} not found");
@@ -45,30 +45,33 @@ namespace CamelRegistry.Logic
         }
 
 
-        public async Task<List<Camel>> GetAllAsync(params Expression<Func<Camel, object>>[] includes) 
+        public async Task<List<Camel>> GetAllAsync(params Expression<Func<Camel, object>>[] includes)
             => await _repo.GetAllAsync(includes);
 
-        public async Task<Camel?> GetByIdAsync(Guid id) => await _repo.GetByIdAsync(id);
-
-        public async Task<Camel> UpdateAsync(Guid id,CamelUpdateModel updateModel)
+        public async Task<Camel> GetByIdAsync(Guid id)
         {
-            var validationResult= await _updateValidator.ValidateAsync(updateModel);
+            var entity= await _repo.GetByIdAsync(id);
+            if (entity == null)
+            {
+                throw new KeyNotFoundException($"Camel with id {id} not found");
+            }
+            return entity;
+        }
 
-            if(!validationResult.IsValid)
+        public async Task<Camel> UpdateAsync(Guid id, CamelUpdateModel updateModel)
+        {
+            var validationResult = await _updateValidator.ValidateAsync(updateModel);
+
+            if (!validationResult.IsValid)
             {
                 throw new ValidationException(validationResult.Errors);
             }
 
-            var existingEntity= await _repo.GetByIdAsync(id);
-
-            if(existingEntity == null)
-            {
-                throw new KeyNotFoundException($"Camel with id {id} not found");
-            }
+            var existingEntity = await GetByIdAsync(id);
 
             _mapper.Map(updateModel, existingEntity);
-            await _repo.UpdateAsync(existingEntity);
-            return existingEntity;
+            await _repo.UpdateAsync(existingEntity!);
+            return existingEntity!;
 
         }
     }
